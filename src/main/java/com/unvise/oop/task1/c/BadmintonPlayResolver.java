@@ -1,23 +1,27 @@
 package com.unvise.oop.task1.c;
 
-import com.unvise.oop.task1.c.weather.Weather;
-import com.unvise.oop.task1.c.weather.enums.Air;
-import com.unvise.oop.task1.c.weather.enums.Humidity;
+import java.util.Objects;
 
 public class BadmintonPlayResolver {
-    public static boolean resolve(Weather weather) {
-        boolean isTemperatureOk = switch (weather.getTemperature()) {
-            case HOT, WARM -> true;
-            default -> false;
-        };
-        boolean isPrecipitationOk = switch (weather.getPrecipitation()) {
-            case CLEAR, CLOUDY -> true;
-            default -> false;
-        };
-        boolean isHumidityOK = weather.getHumidity().equals(Humidity.LOW);
-        boolean isAir = weather.getAir().equals(Air.NO);
+    public static boolean resolve(String dayOfWeek,
+                                  String temperature,
+                                  String precipitation,
+                                  String humidity,
+                                  String air) {
+        dayOfWeek = dayOfWeek.toLowerCase();
+        temperature = temperature.toLowerCase();
+        precipitation = precipitation.toLowerCase();
+        humidity = humidity.toLowerCase();
+        air = air.toLowerCase();
 
-        return isTemperatureOk
+        boolean isDayOfWeekOk = Objects.equals(dayOfWeek, "воскресенье");
+        boolean isTemperatureOk = Objects.equals(temperature, "тепло");
+        boolean isPrecipitationOk = Objects.equals(precipitation, "ясно");
+        boolean isHumidityOK = Objects.equals(humidity, "низкая");
+        boolean isAir = Objects.equals(air, "нет");
+
+        return isDayOfWeekOk
+                && isTemperatureOk
                 && isPrecipitationOk
                 && isHumidityOK
                 && isAir;
